@@ -2,13 +2,24 @@ import React from 'react'
 
 class Main extends React.Component{
     state ={
+        goals: [],
         goalDesc: '',
         targetDate: ''
     }
     
     addGoal = () =>{
-        console.log(this.state.goalDesc)
-        console.log(this.state.targetDate)
+        let newGoal = {
+            goalDesc: this.state.goalDesc,
+            targetDate: this.state.targetDate,
+            finishDate: '',
+            status: 'In-Progress'
+        }
+        let newGoals = this.state.goals;
+        newGoals.push(newGoal);
+        this.setState({
+            goals : newGoals
+        })
+        console.log(this.state.goals)
     }
 
     handleChange = (event) =>{
