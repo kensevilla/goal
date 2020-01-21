@@ -54,30 +54,51 @@ class Main extends React.Component{
         let sortedGoals = this.sortGoals();
         let currentYear = '';
         return sortedGoals.map(goal => {
-            let dateToCheck = (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
+            let dateToCheck = this.getDateToCheck(goal);
             let newYear = dateToCheck.split("-")[0];
             if(currentYear !== newYear){
                 currentYear = newYear;
-                let goalsForYear = this.getGoalsForYear(sortedGoals, currentYear);
-                return <div className= {currentYear}><h2>{currentYear}</h2>
-                    {goalsForYear}
+                let goalsPerYear = this.getGoalsPerYear(sortedGoals, currentYear);
+                return <div className= {currentYear}>
+                    <h2>{currentYear}</h2>
+                    {goalsPerYear}
                 </div>;
             }
         })
     }
 
-    getGoalsForYear = (sortedGoals, currentYear) =>{
-        return sortedGoals.map(goal => {
-            let dateToCheck = (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
+    getGoalsPerYear = (sortedGoals, currentYear) =>{
+        let datesPerYear = sortedGoals.map(goal => {
+            let dateToCheck = this.getDateToCheck(goal);
             if(currentYear === dateToCheck.split("-")[0]){
+                return dateToCheck;
+            }
+        }).reduce((unique, item) => item == null ? unique: unique.includes(item) ? unique : [...unique, item], []);
+
+        return datesPerYear.map(date => {
+            let goalsPerDate = this.getGoalsPerDate(sortedGoals, date);
+            return <div className={date}>
+                <span>{date} : </span>
+                {goalsPerDate}
+            </div>
+        })
+    }
+
+    getGoalsPerDate = (sortedGoals, date) =>{
+        return sortedGoals.map(goal => {
+            let dateToCheck = this.getDateToCheck(goal);
+            if(date === dateToCheck){
                 return <Goal goal={goal} />
             }
         })
     }
 
+    getDateToCheck = (goal) => {
+        return (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
+    }
+
     render(){
         let goals = this.prepareGoals();
-        console.log(goals);
         return(
             <div className='Main'>
                 <p>Add goal</p>

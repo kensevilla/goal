@@ -7,8 +7,9 @@ class Goal extends React.Component{
     render(){
         return(
             <div className='Goal'>
-                <p>{this.props.goal.goalDesc}</p>
-                <p>{this.props.goal.targetDate}</p>
+                <span>{this.props.goal.goalDesc}</span>
+                <button>Complete</button>
+                <button>Move</button>
             </div>
         )
     }
