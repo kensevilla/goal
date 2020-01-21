@@ -77,8 +77,10 @@ class Main extends React.Component{
 
         return datesPerYear.map(date => {
             let goalsPerDate = this.getGoalsPerDate(sortedGoals, date);
+            let splittedDate = date.split("-");
+            let dateToShow = this.convertMonth(splittedDate[1]) + " " + splittedDate[2];
             return <div className={date}>
-                <span>{date} : </span>
+                <span>{dateToShow}</span>
                 {goalsPerDate}
             </div>
         })
@@ -95,6 +97,35 @@ class Main extends React.Component{
 
     getDateToCheck = (goal) => {
         return (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
+    }
+
+    convertMonth = (monthNumber) => {
+        switch(monthNumber){
+            case "01":
+                return "January"
+            case "02":
+                return "February"
+            case "03":
+                return "March"
+            case "04":
+                return "April"
+            case "05":
+                return "May"
+            case "06":
+                return "June"
+            case "07":
+                return "July"
+            case "08":
+                return "August"
+            case "09":
+                return "September"
+            case "10":
+                return "October"
+            case "11":
+                return "November"
+            case "12":
+                return "December"
+        }
     }
 
     render(){
