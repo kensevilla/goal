@@ -2,8 +2,8 @@ import React from 'react'
 import Goal from '../goal/goal'
 
 class Main extends React.Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state ={
             goals: [],
             goalDesc: '',
@@ -34,8 +34,8 @@ class Main extends React.Component{
 
     sortGoals = () => {
         return this.state.goals.sort((a, b) => {
-            let date1 = (a.finishDate == '') ? a.targetDate : a.finishDate;
-            let date2 = (b.finishDate == '') ? b.targetDate : b.finishDate;
+            let date1 = (a.finishDate === '') ? a.targetDate : a.finishDate;
+            let date2 = (b.finishDate === '') ? b.targetDate : b.finishDate;
             return (date1 > date2) ? 1 : -1;
         })
     }
@@ -52,11 +52,32 @@ class Main extends React.Component{
 
     prepareGoals = () =>{
         let sortedGoals = this.sortGoals();
-        return sortedGoals.map(goal => <Goal goal={goal} />)
+        let currentYear = '';
+        return sortedGoals.map(goal => {
+            let dateToCheck = (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
+            let newYear = dateToCheck.split("-")[0];
+            if(currentYear !== newYear){
+                currentYear = newYear;
+                let goalsForYear = this.getGoalsForYear(sortedGoals, currentYear);
+                return <div className= {currentYear}><h2>{currentYear}</h2>
+                    {goalsForYear}
+                </div>;
+            }
+        })
+    }
+
+    getGoalsForYear = (sortedGoals, currentYear) =>{
+        return sortedGoals.map(goal => {
+            let dateToCheck = (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
+            if(currentYear === dateToCheck.split("-")[0]){
+                return <Goal goal={goal} />
+            }
+        })
     }
 
     render(){
         let goals = this.prepareGoals();
+        console.log(goals);
         return(
             <div className='Main'>
                 <p>Add goal</p>
