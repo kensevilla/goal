@@ -11,14 +11,15 @@ class Goal extends React.Component{
     }
 
     setActionsBasedOnDate = () =>{
+        let id = this.props.goal.id;
         return this.props.goal.targetDate >= getCurrentDate() ? 
             <div className='Action'>
-                <button onClick={() => this.props.handleActions.completeGoal(this.props.goal.id)}>Complete</button>
+                <button onClick={() => this.props.handleActions.completeGoal(id)}>Complete</button>
             </div>
             :
             <div className='Action'>
-                <button onClick={() => this.props.handleActions.failGoal(this.props.goal.id)}>Give-up</button>
-                <button onClick={() => this.props.handleActions.moveGoal(this.props.goal.id, this.state.newTargetDate)}>Move</button>
+                <button onClick={() => this.props.handleActions.failGoal(id)}>Give-up</button>
+                <button onClick={() => this.props.handleActions.moveGoal(id, this.state.newTargetDate)}>Move</button>
                 <input type='date' value = {this.state.newTargetDate} name='newTargetDate' onChange={this.handleChange} min={getCurrentDate()}></input>
             </div>;
     }
@@ -32,7 +33,6 @@ class Goal extends React.Component{
     render(){
         let status  = this.props.goal.status;
         let id = this.props.goal.id;
-        
         return(
             status == 'Completed' ? 
             <div className={status} id={id}>
