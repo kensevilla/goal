@@ -53,6 +53,7 @@ class Main extends React.Component{
 
     prepareGoals = () =>{
         let sortedGoals = this.sortGoals();
+        console.log(sortedGoals);
         let currentYear = '';
         return sortedGoals.map(goal => {
             let dateToCheck = this.getDateToCheck(goal);
@@ -91,13 +92,26 @@ class Main extends React.Component{
         return sortedGoals.map(goal => {
             let dateToCheck = this.getDateToCheck(goal);
             if(date === dateToCheck){
-                return <Goal goal={goal} key={goal.id} />
+                return <Goal goal={goal} key={goal.id} handleCompleteGoal={this.completeGoal} />
             }
         })
     }
 
     getDateToCheck = (goal) => {
         return (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
+    }
+
+    completeGoal = (id) =>{
+        let updatedGoals = this.state.goals.map(goal => {
+            if(goal.id === id){
+                goal.finishDate = this.getCurrentDate();
+                goal.status = 'Completed';
+            }
+            return goal;
+        });
+        this.setState({
+            goals : updatedGoals
+        })
     }
 
     convertMonth = (monthNumber) => {
@@ -130,7 +144,6 @@ class Main extends React.Component{
     }
 
     generateUUID = () =>{
-        /*jshint bitwise:false */
         let i,
             random;
         let uuid = '';
