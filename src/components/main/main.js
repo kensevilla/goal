@@ -1,5 +1,6 @@
 import React from 'react'
 import Goal from '../goal/goal'
+import {getCurrentDate, generateUUID, convertMonth} from '../util/util'
 
 class Main extends React.Component{
     constructor(){
@@ -7,13 +8,13 @@ class Main extends React.Component{
         this.state ={
             goals: [],
             goalDesc: '',
-            targetDate: this.getCurrentDate()
+            targetDate: getCurrentDate()
         }
     }
 
     addGoal = () =>{
         let newGoal = {
-            id : this.generateUUID(),
+            id : generateUUID(),
             goalDesc: this.state.goalDesc,
             targetDate: this.state.targetDate,
             finishDate: '',
@@ -24,7 +25,6 @@ class Main extends React.Component{
         this.setState({
             goals : newGoals
         })
-        console.log(this.state.goals)
     }
 
     handleChange = (event) =>{
@@ -41,19 +41,8 @@ class Main extends React.Component{
         })
     }
 
-    getCurrentDate = () =>{
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0');
-        let yyyy = today.getFullYear();
-
-        today = yyyy + '-' + mm + '-' + dd;
-        return today;
-    }
-
     prepareGoals = () =>{
         let sortedGoals = this.sortGoals();
-        console.log(sortedGoals);
         let currentYear = '';
         return sortedGoals.map(goal => {
             let dateToCheck = this.getDateToCheck(goal);
@@ -80,7 +69,7 @@ class Main extends React.Component{
         return datesPerYear.map(date => {
             let goalsPerDate = this.getGoalsPerDate(sortedGoals, date);
             let splittedDate = date.split("-");
-            let dateToShow = this.convertMonth(splittedDate[1]) + " " + splittedDate[2];
+            let dateToShow = convertMonth(splittedDate[1]) + " " + splittedDate[2];
             return <div className={date} key={date}>
                 <span>{dateToShow}</span>
                 {goalsPerDate}
@@ -104,7 +93,7 @@ class Main extends React.Component{
     completeGoal = (id) =>{
         let updatedGoals = this.state.goals.map(goal => {
             if(goal.id === id){
-                goal.finishDate = this.getCurrentDate();
+                goal.finishDate = getCurrentDate();
                 goal.status = 'Completed';
             }
             return goal;
@@ -114,61 +103,13 @@ class Main extends React.Component{
         })
     }
 
-    convertMonth = (monthNumber) => {
-        switch(monthNumber){
-            case "01":
-                return "January"
-            case "02":
-                return "February"
-            case "03":
-                return "March"
-            case "04":
-                return "April"
-            case "05":
-                return "May"
-            case "06":
-                return "June"
-            case "07":
-                return "July"
-            case "08":
-                return "August"
-            case "09":
-                return "September"
-            case "10":
-                return "October"
-            case "11":
-                return "November"
-            case "12":
-                return "December"
-        }
-    }
-
-    generateUUID = () =>{
-        let i,
-            random;
-        let uuid = '';
-
-        for (i = 0; i < 32; i++) {
-            random = Math.random() * 16 | 0;
-            if (i === 8 || i === 12 || i === 16 || i === 20) {
-                uuid += '-';
-            }
-            uuid += (i === 12
-                ? 4
-                : (i === 16
-                    ? (random & 3 | 8)
-                    : random)).toString(16);
-        }
-        return uuid;
-    }
-
     render(){
         let goals = this.prepareGoals();
         return(
             <div className='Main'>
                 <p>Add goal</p>
                 <input type='text' name='goalDesc' onChange={this.handleChange}></input>
-                <input type='date' value = {this.state.targetDate} name='targetDate' onChange={this.handleChange} min={this.getCurrentDate()}></input>
+                <input type='date' value = {this.state.targetDate} name='targetDate' onChange={this.handleChange} min={getCurrentDate()}></input>
                 <button onClick={this.addGoal}>Add</button>
                 {goals}
             </div>
