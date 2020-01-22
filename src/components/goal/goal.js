@@ -6,7 +6,7 @@ class Goal extends React.Component{
     }
     render(){
         return(
-            <div className='Goal'>
+            <div className={this.props.goal.status} id={this.props.goal.id}>
                 <span>{this.props.goal.goalDesc}</span>
                 <button>Complete</button>
                 <button>Move</button>

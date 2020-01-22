@@ -13,6 +13,7 @@ class Main extends React.Component{
 
     addGoal = () =>{
         let newGoal = {
+            id : this.generateUUID(),
             goalDesc: this.state.goalDesc,
             targetDate: this.state.targetDate,
             finishDate: '',
@@ -59,7 +60,7 @@ class Main extends React.Component{
             if(currentYear !== newYear){
                 currentYear = newYear;
                 let goalsPerYear = this.getGoalsPerYear(sortedGoals, currentYear);
-                return <div className= {currentYear}>
+                return <div className= {currentYear} key={currentYear}>
                     <h2>{currentYear}</h2>
                     {goalsPerYear}
                 </div>;
@@ -79,7 +80,7 @@ class Main extends React.Component{
             let goalsPerDate = this.getGoalsPerDate(sortedGoals, date);
             let splittedDate = date.split("-");
             let dateToShow = this.convertMonth(splittedDate[1]) + " " + splittedDate[2];
-            return <div className={date}>
+            return <div className={date} key={date}>
                 <span>{dateToShow}</span>
                 {goalsPerDate}
             </div>
@@ -90,7 +91,7 @@ class Main extends React.Component{
         return sortedGoals.map(goal => {
             let dateToCheck = this.getDateToCheck(goal);
             if(date === dateToCheck){
-                return <Goal goal={goal} />
+                return <Goal goal={goal} key={goal.id} />
             }
         })
     }
@@ -126,6 +127,26 @@ class Main extends React.Component{
             case "12":
                 return "December"
         }
+    }
+
+    generateUUID = () =>{
+        /*jshint bitwise:false */
+        let i,
+            random;
+        let uuid = '';
+
+        for (i = 0; i < 32; i++) {
+            random = Math.random() * 16 | 0;
+            if (i === 8 || i === 12 || i === 16 || i === 20) {
+                uuid += '-';
+            }
+            uuid += (i === 12
+                ? 4
+                : (i === 16
+                    ? (random & 3 | 8)
+                    : random)).toString(16);
+        }
+        return uuid;
     }
 
     render(){
