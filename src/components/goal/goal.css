@@ -2,6 +2,10 @@
     color: green;
   }
 
+.Fail {
+    color: red;
+}
+
   #originalDate{
       color: black;
   }

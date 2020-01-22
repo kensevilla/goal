@@ -12,6 +12,12 @@ class Main extends React.Component{
         }
     }
 
+    handleChange = (event) =>{
+        this.setState({
+            [event.target.name] : event.target.value
+        })
+    }
+
     addGoal = () =>{
         let newGoal = {
             id : generateUUID(),
@@ -24,12 +30,6 @@ class Main extends React.Component{
         newGoals.push(newGoal);
         this.setState({
             goals : newGoals
-        })
-    }
-
-    handleChange = (event) =>{
-        this.setState({
-            [event.target.name] : event.target.value
         })
     }
 
@@ -78,10 +78,15 @@ class Main extends React.Component{
     }
 
     getGoalsPerDate = (sortedGoals, date) =>{
+        let actions = {
+            completeGoal: this.completeGoal,
+            failGoal: this.failGoal,
+            moveGoal: this.moveGoal
+        };
         return sortedGoals.map(goal => {
             let dateToCheck = this.getDateToCheck(goal);
             if(date === dateToCheck){
-                return <Goal goal={goal} key={goal.id} handleCompleteGoal={this.completeGoal} />
+                return <Goal goal={goal} key={goal.id} handleActions={actions} />
             }
         })
     }
@@ -95,6 +100,30 @@ class Main extends React.Component{
             if(goal.id === id){
                 goal.finishDate = getCurrentDate();
                 goal.status = 'Completed';
+            }
+            return goal;
+        });
+        this.setState({
+            goals : updatedGoals
+        })
+    }
+
+    failGoal = (id) =>{
+        let updatedGoals = this.state.goals.map(goal => {
+            if(goal.id === id){
+                goal.status = 'Fail';
+            }
+            return goal;
+        });
+        this.setState({
+            goals : updatedGoals
+        })
+    }
+
+    moveGoal = (id, newTargetDate) =>{
+        let updatedGoals = this.state.goals.map(goal => {
+            if(goal.id === id){
+                goal.targetDate = newTargetDate;
             }
             return goal;
         });

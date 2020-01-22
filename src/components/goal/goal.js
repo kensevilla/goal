@@ -1,14 +1,38 @@
 import React from 'react';
 import './goal.css';
+import {getCurrentDate} from '../util/util'
 
 class Goal extends React.Component{
     constructor(props){
         super(props);
+        this.state ={
+            newTargetDate: getCurrentDate()
+        }
+    }
+
+    setActionsBasedOnDate = () =>{
+        return this.props.goal.targetDate >= getCurrentDate() ? 
+            <div className='Action'>
+                <button onClick={() => this.props.handleActions.completeGoal(this.props.goal.id)}>Complete</button>
+            </div>
+            :
+            <div className='Action'>
+                <button onClick={() => this.props.handleActions.failGoal(this.props.goal.id)}>Give-up</button>
+                <button onClick={() => this.props.handleActions.moveGoal(this.props.goal.id, this.state.newTargetDate)}>Move</button>
+                <input type='date' value = {this.state.newTargetDate} name='newTargetDate' onChange={this.handleChange} min={getCurrentDate()}></input>
+            </div>;
+    }
+
+    handleChange = (event) =>{
+        this.setState({
+            [event.target.name] : event.target.value
+        })
     }
 
     render(){
         let status  = this.props.goal.status;
         let id = this.props.goal.id;
+        
         return(
             status == 'Completed' ? 
             <div className={status} id={id}>
@@ -16,10 +40,15 @@ class Goal extends React.Component{
                 <span>{this.props.goal.goalDesc}</span>
                 <span id='originalDate'> Original Target Date: {this.props.goal.targetDate}</span>
             </div>
-            :
+            : status == 'In-Progress' ?
             <div className={status} id={id}>
                 <span>{this.props.goal.goalDesc}</span>
-                <button onClick={() => this.props.handleCompleteGoal(id)}>Complete</button>
+                {this.setActionsBasedOnDate()}
+            </div>
+            :
+            <div className={status} id={id}>
+                <span>Given up on </span>
+                <span>{this.props.goal.goalDesc}</span>
             </div>
         )
     }
