@@ -6,7 +6,6 @@ class Main extends React.Component{
     constructor(){
         super();
         this.state ={
-            goals: [],
             goalDesc: '',
             targetDate: getCurrentDate()
         }
@@ -26,15 +25,11 @@ class Main extends React.Component{
             finishDate: '',
             status: 'In-Progress'
         }
-        let newGoals = this.state.goals;
-        newGoals.push(newGoal);
-        this.setState({
-            goals : newGoals
-        })
+        this.props.addGoal(newGoal);
     }
 
     sortGoals = () => {
-        return this.state.goals.sort((a, b) => {
+        return this.props.goals.sort((a, b) => {
             let date1 = (a.finishDate === '') ? a.targetDate : a.finishDate;
             let date2 = (b.finishDate === '') ? b.targetDate : b.finishDate;
             return (date1 > date2) ? 1 : -1;
@@ -96,40 +91,15 @@ class Main extends React.Component{
     }
 
     completeGoal = (id) =>{
-        let updatedGoals = this.state.goals.map(goal => {
-            if(goal.id === id){
-                goal.finishDate = getCurrentDate();
-                goal.status = 'Completed';
-            }
-            return goal;
-        });
-        this.setState({
-            goals : updatedGoals
-        })
+        this.props.completeGoal(id);
     }
 
     failGoal = (id) =>{
-        let updatedGoals = this.state.goals.map(goal => {
-            if(goal.id === id){
-                goal.status = 'Fail';
-            }
-            return goal;
-        });
-        this.setState({
-            goals : updatedGoals
-        })
+        this.props.failGoal(id);
     }
 
     moveGoal = (id, newTargetDate) =>{
-        let updatedGoals = this.state.goals.map(goal => {
-            if(goal.id === id){
-                goal.targetDate = newTargetDate;
-            }
-            return goal;
-        });
-        this.setState({
-            goals : updatedGoals
-        })
+        this.props.moveGoal({id, newTargetDate});
     }
 
     render(){

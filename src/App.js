@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Main from './components/main/main'
+import Container from './state/main/action'
 
 class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <Main />
+        <Container />
       </div>
     );
   }
