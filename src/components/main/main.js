@@ -1,5 +1,9 @@
 import React from 'react'
+import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
+
 import Goal from '../goal/goal'
+import {addGoal, completeGoal, failGoal, moveGoal} from '../../state/main/action'
 import {getCurrentDate, generateUUID, convertMonth} from '../util/util'
 
 class Main extends React.Component{
@@ -25,7 +29,7 @@ class Main extends React.Component{
             finishDate: '',
             status: 'In-Progress'
         }
-        this.props.addGoal(newGoal);
+        this.props.actions.addGoal(newGoal);
     }
 
     sortGoals = () => {
@@ -91,15 +95,15 @@ class Main extends React.Component{
     }
 
     completeGoal = (id) =>{
-        this.props.completeGoal(id);
+        this.props.actions.completeGoal(id);
     }
 
     failGoal = (id) =>{
-        this.props.failGoal(id);
+        this.props.actions.failGoal(id);
     }
 
     moveGoal = (id, newTargetDate) =>{
-        this.props.moveGoal({id, newTargetDate});
+        this.props.actions.moveGoal({id, newTargetDate});
     }
 
     render(){
@@ -116,4 +120,17 @@ class Main extends React.Component{
     }
 }
 
-export default Main;
+function mapStateToProps(state){
+    return {
+        goals : state.mainreducer.goals,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {actions: bindActionCreators({addGoal, completeGoal, failGoal, moveGoal}, dispatch)}
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Main);  

@@ -1,34 +1,32 @@
-import { connect } from "react-redux";
-import Main from '../../components/main/main'
-
-const mapDispatchToProps = dispatch => ({
-    addGoal: goalDetails =>
-      dispatch({
-        type: "ADD_GOAL",
-        payload: goalDetails
-      }),
-    completeGoal: id =>
-      dispatch({
-          type: "COMPLETE_GOAL",
-          payload: id
-      }),
-    failGoal: id =>
-      dispatch({
-          type: "FAIL_GOAL",
-          payload: id
-      }),
-    moveGoal: goalDetails =>
-      dispatch({
-          type: "MOVE_GOAL",
-          payload: goalDetails
-      })
-});
-
-const mapStateToProps = state => ({
-    goals : state.mainreducer.goals,
- });
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Main);  
+export const addGoal = goalDetails =>{
+    return async (dispatch) => {
+        dispatch({
+            type: "ADD_GOAL",
+            payload: goalDetails
+        })
+    }
+}
+export const completeGoal = id =>{
+    return async (dispatch) => {
+        dispatch({
+            type: "COMPLETE_GOAL",
+            payload: id
+        })
+    }
+}
+export const failGoal = id =>{
+    return async (dispatch) => {
+        dispatch({
+            type: "FAIL_GOAL",
+            payload: id
+        })
+    }
+}
+export const moveGoal = goalDetails =>{
+    return async (dispatch) => {
+        dispatch({
+            type: "MOVE_GOAL",
+            payload: goalDetails
+        })
+    }
+}
