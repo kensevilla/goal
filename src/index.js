@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 
 let store = createStore(
     rootReducer,
-    applyMiddleware(thunk)
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(applyMiddleware(thunk))
 );
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

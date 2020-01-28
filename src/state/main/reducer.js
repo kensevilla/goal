@@ -6,6 +6,8 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case "FETCH_GOALS":
+            return {...state, goals: action.payload};
         case "ADD_GOAL":
             return {...state, goals: [...state.goals, action.payload]};
         case "COMPLETE_GOAL":

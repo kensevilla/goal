@@ -3,8 +3,8 @@ import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
 
 import Goal from '../goal/goal'
-import {addGoal, completeGoal, failGoal, moveGoal} from '../../state/main/action'
-import {getCurrentDate, generateUUID, convertMonth} from '../util/util'
+import {fetchGoals, addGoal, completeGoal, failGoal, moveGoal} from '../../state/main/action'
+import {getCurrentDate, convertMonth} from '../util/util'
 
 class Main extends React.Component{
     constructor(){
@@ -15,6 +15,10 @@ class Main extends React.Component{
         }
     }
 
+    componentDidMount(){
+        this.props.actions.fetchGoals();
+    }
+
     handleChange = (event) =>{
         this.setState({
             [event.target.name] : event.target.value
@@ -23,8 +27,7 @@ class Main extends React.Component{
 
     addGoal = () =>{
         let newGoal = {
-            id : generateUUID(),
-            goalDesc: this.state.goalDesc,
+            description: this.state.goalDesc,
             targetDate: this.state.targetDate,
             finishDate: '',
             status: 'In-Progress'
@@ -122,12 +125,12 @@ class Main extends React.Component{
 
 function mapStateToProps(state){
     return {
-        goals : state.mainreducer.goals,
+        goals : state.main.goals
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators({addGoal, completeGoal, failGoal, moveGoal}, dispatch)}
+    return {actions: bindActionCreators({fetchGoals, addGoal, completeGoal, failGoal, moveGoal}, dispatch)}
 }
 
 export default connect(
