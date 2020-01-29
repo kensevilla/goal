@@ -22,25 +22,29 @@ export const addGoal = goalDetails =>{
 }
 export const completeGoal = id =>{
     return async (dispatch) => {
+        const response = await axios.post(url + '/completeGoal/' + id);
         dispatch({
             type: "COMPLETE_GOAL",
-            payload: id
+            payload: response.data.id
         })
     }
 }
 export const failGoal = id =>{
     return async (dispatch) => {
+        const response = await axios.post(url + '/failGoal/' + id);
         dispatch({
             type: "FAIL_GOAL",
-            payload: id
+            payload: response.data.id
         })
     }
 }
-export const moveGoal = goalDetails =>{
+export const moveGoal = (id, newTargetDate) =>{
     return async (dispatch) => {
+        console.log(newTargetDate);
+        const response = await axios.post(url + '/moveGoal/' + id, {targetDate: newTargetDate});
         dispatch({
             type: "MOVE_GOAL",
-            payload: goalDetails
+            payload: {id : response.data.id, newTargetDate : response.data.targetDate}
         })
     }
 }

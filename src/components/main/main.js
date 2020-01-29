@@ -106,7 +106,7 @@ class Main extends React.Component{
     }
 
     moveGoal = (id, newTargetDate) =>{
-        this.props.actions.moveGoal({id, newTargetDate});
+        this.props.actions.moveGoal(id, newTargetDate);
     }
 
     render(){
