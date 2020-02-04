@@ -1,25 +1,27 @@
 import React from 'react';
+import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
+
+import {completeGoal, failGoal, moveGoal} from '../../state/goal/action'
+
 import './goal.css';
 import {getCurrentDate} from '../util/util'
 
 class Goal extends React.Component{
-    constructor(props){
-        super(props);
-        this.state ={
-            newTargetDate: getCurrentDate()
-        }
+    state ={
+        newTargetDate: getCurrentDate()
     }
-
+    
     setActionsBasedOnDate = () =>{
         let id = this.props.goal.id;
         return this.props.goal.targetDate >= getCurrentDate() ? 
             <div className='Action'>
-                <button onClick={() => this.props.handleActions.completeGoal(id)}>Complete</button>
+                <button onClick={this.props.actions.completeGoal.bind(this, id)}>Complete</button>
             </div>
             :
             <div className='Action'>
-                <button onClick={() => this.props.handleActions.failGoal(id)}>Give-up</button>
-                <button onClick={() => this.props.handleActions.moveGoal(id, this.state.newTargetDate)}>Move</button>
+                <button onClick={this.props.actions.failGoal.bind(this, id)}>Give-up</button>
+                <button onClick={this.props.actions.moveGoal.bind(this, id, this.state.newTargetDate)}>Move</button>
                 <input type='date' value = {this.state.newTargetDate} name='newTargetDate' onChange={this.handleChange} min={getCurrentDate()}></input>
             </div>;
     }
@@ -55,4 +57,17 @@ class Goal extends React.Component{
     }
 }
 
-export default Goal;
+function mapStateToProps(state){
+    return {
+        goals : state.goal.goals
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {actions: bindActionCreators({completeGoal, failGoal, moveGoal}, dispatch)}
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Goal);  

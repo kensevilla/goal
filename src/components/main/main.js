@@ -3,18 +3,15 @@ import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
 
 import Goal from '../goal/goal'
-import {fetchGoals, addGoal, completeGoal, failGoal, moveGoal} from '../../state/main/action'
+import {fetchGoals, addGoal} from '../../state/goal/action'
 import {getCurrentDate, convertMonth} from '../util/util'
 
 class Main extends React.Component{
-    constructor(){
-        super();
-        this.state ={
-            goalDesc: '',
-            targetDate: getCurrentDate()
-        }
+    state ={
+        goalDesc: '',
+        targetDate: getCurrentDate()
     }
-
+    
     componentDidMount(){
         this.props.actions.fetchGoals();
     }
@@ -80,33 +77,16 @@ class Main extends React.Component{
     }
 
     getGoalsPerDate = (sortedGoals, date) =>{
-        let actions = {
-            completeGoal: this.completeGoal,
-            failGoal: this.failGoal,
-            moveGoal: this.moveGoal
-        };
         return sortedGoals.map(goal => {
             let dateToCheck = this.getDateToCheck(goal);
             if(date === dateToCheck){
-                return <Goal goal={goal} key={goal.id} handleActions={actions} />
+                return <Goal goal={goal} key={goal.id} />
             }
         })
     }
 
     getDateToCheck = (goal) => {
         return (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
-    }
-
-    completeGoal = (id) =>{
-        this.props.actions.completeGoal(id);
-    }
-
-    failGoal = (id) =>{
-        this.props.actions.failGoal(id);
-    }
-
-    moveGoal = (id, newTargetDate) =>{
-        this.props.actions.moveGoal(id, newTargetDate);
     }
 
     render(){
@@ -125,12 +105,12 @@ class Main extends React.Component{
 
 function mapStateToProps(state){
     return {
-        goals : state.main.goals
+        goals : state.goal.goals
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators({fetchGoals, addGoal, completeGoal, failGoal, moveGoal}, dispatch)}
+    return {actions: bindActionCreators({fetchGoals, addGoal}, dispatch)}
 }
 
 export default connect(

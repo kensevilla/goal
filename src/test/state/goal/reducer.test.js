@@ -1,4 +1,4 @@
-import reducer from '../../../state/main/reducer'
+import reducer from '../../../state/goal/reducer'
 import {clone, checkReducerFn} from '../../testHelper'
 import {getCurrentDate} from '../../../components/util/util'
 

@@ -1,4 +1,4 @@
-import * as actions from '../../../state/main/action'
+import * as actions from '../../../state/goal/action'
 
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
