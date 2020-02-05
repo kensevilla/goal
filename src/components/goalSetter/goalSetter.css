@@ -1,0 +1,15 @@
+#addGoalButton{
+    margin-left: 20%;
+    width: 90px;
+    height: 90px;
+    font-size: 40px;
+    background-color: transparent;
+    border-color: rgba(0, 148, 255, 0.8);
+    color: #808080;
+}
+
+#addGoalButton:hover, #addGoalButton:focus{
+    background-color: rgba(0, 148, 255, 0.8);
+    border-color: rgba(0, 148, 255, 0.8);
+    color: white;
+}

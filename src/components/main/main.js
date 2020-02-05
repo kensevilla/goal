@@ -2,9 +2,16 @@ import React from 'react'
 import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
 
+import './main.css'
+
 import Goal from '../goal/goal'
-import {fetchGoals, addGoal} from '../../state/goal/action'
+import GoalSetter from '../goalSetter/goalSetter'
+
+import {fetchGoals} from '../../state/goal/action'
 import {getCurrentDate, convertMonth} from '../util/util'
+
+import 'antd/dist/antd.css';
+import { Row, Col } from 'antd';
 
 class Main extends React.Component{
     state ={
@@ -20,16 +27,6 @@ class Main extends React.Component{
         this.setState({
             [event.target.name] : event.target.value
         })
-    }
-
-    addGoal = () =>{
-        let newGoal = {
-            description: this.state.goalDesc,
-            targetDate: this.state.targetDate,
-            finishDate: '',
-            status: 'In-Progress'
-        }
-        this.props.actions.addGoal(newGoal);
     }
 
     sortGoals = () => {
@@ -93,11 +90,14 @@ class Main extends React.Component{
         let goals = this.prepareGoals();
         return(
             <div className='Main'>
-                <p>Add goal</p>
-                <input type='text' name='goalDesc' onChange={this.handleChange}></input>
-                <input type='date' value = {this.state.targetDate} name='targetDate' onChange={this.handleChange} min={getCurrentDate()}></input>
-                <button onClick={this.addGoal}>Add</button>
-                {goals}
+                <Row>
+                    <Col span={12}>
+                        {goals}
+                    </Col>
+                    <Col span={12}>
+                        <GoalSetter />
+                    </Col>
+                </Row>
             </div>
         )
     }
@@ -110,7 +110,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators({fetchGoals, addGoal}, dispatch)}
+    return {actions: bindActionCreators({fetchGoals}, dispatch)}
 }
 
 export default connect(

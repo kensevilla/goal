@@ -1,0 +1,11 @@
+.ant-select-sm .ant-select-selection--single{
+    width: 100px;
+}
+
+.ant-fullcalendar-selected-day .ant-fullcalendar-value, .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value{
+    background-color: rgba(0, 148, 255, 0.8);
+}
+
+.ant-alert-info{
+    border: 1px solid rgba(0, 148, 255, 0.8);
+}
