@@ -1,0 +1,96 @@
+import React from 'react'
+import {connect} from "react-redux"
+
+import Goal from '../goal/goal'
+
+import 'antd/dist/antd.css'
+import { Timeline, Icon, Card } from 'antd'
+
+import {convertMonth} from '../util/util'
+import './goalProgress.css'
+
+class GoalProgress extends React.Component{
+
+    sortGoals = () => {
+        return this.props.goals.sort((a, b) => {
+            let date1 = (a.finishDate === '') ? a.targetDate : a.finishDate;
+            let date2 = (b.finishDate === '') ? b.targetDate : b.finishDate;
+            return (date1 > date2) ? 1 : -1;
+        })
+    }
+
+    prepareGoals = () =>{
+        let sortedGoals = this.sortGoals();
+        let currentYear = '';
+        return sortedGoals.map(goal => {
+            let dateToCheck = this.getDateToCheck(goal);
+            let newYear = dateToCheck.split("-")[0];
+            if(currentYear !== newYear){
+                currentYear = newYear;
+                let goalsPerYear = this.getGoalsPerYear(sortedGoals, currentYear);
+                return <div className= {currentYear} key={currentYear}>
+                    <Icon type="calendar" style={{ fontSize: '30px' }} /> <span id="year">{currentYear}</span>
+                    <hr></hr>
+                    <Timeline id="timeline">
+                        {goalsPerYear}
+                    </Timeline>
+                </div>;
+            }
+        })
+    }
+
+    getGoalsPerYear = (sortedGoals, currentYear) =>{
+        let datesPerYear = sortedGoals.map(goal => {
+            let dateToCheck = this.getDateToCheck(goal);
+            if(currentYear === dateToCheck.split("-")[0]){
+                return dateToCheck;
+            }
+        }).reduce((unique, item) => item == null ? unique: unique.includes(item) ? unique : [...unique, item], []);
+
+        return datesPerYear.map(date => {
+            let goalsPerDate = this.getGoalsPerDate(sortedGoals, date);
+            let splittedDate = date.split("-");
+            let dateToShow = convertMonth(splittedDate[1]) + " " + splittedDate[2];
+            return <div className={date} key={date}>
+                 <Timeline.Item id="date" dot={<Icon type="pushpin" style={{ fontSize: '25px' }} />}>{dateToShow}</Timeline.Item>
+                {goalsPerDate}
+            </div>
+        })
+    }
+
+    getGoalsPerDate = (sortedGoals, date) =>{
+        return sortedGoals.map(goal => {
+            let color = goal.status==='Completed' ? 'green' : goal.status === 'In-Progress' ? 'gray' : 'red';
+            let dateToCheck = this.getDateToCheck(goal);
+            if(date === dateToCheck){
+                return <Timeline.Item color={color}><Goal goal={goal} key={goal.id} /></Timeline.Item>
+            }
+        })
+    }
+
+    getDateToCheck = (goal) => {
+        return (goal.status === 'Completed') ? goal.finishDate : goal.targetDate;
+    }
+
+    render(){
+        let goals = this.prepareGoals();
+        return(
+            <div className="GoalProgress">
+                <Card id="card" style={{ width: 700, height: 800}}>
+                    {goals}
+                </Card>
+            </div>
+        )
+    }
+}
+
+function mapStateToProps(state){
+    return {
+        goals : state.goal.goals
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    null
+  )(GoalProgress);  

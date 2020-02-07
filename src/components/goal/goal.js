@@ -3,8 +3,6 @@ import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
 
 import {completeGoal, failGoal, moveGoal} from '../../state/goal/action'
-
-import './goal.css';
 import {getCurrentDate} from '../util/util'
 
 class Goal extends React.Component{
@@ -34,25 +32,22 @@ class Goal extends React.Component{
 
     render(){
         let status  = this.props.goal.status;
-        let id = this.props.goal.id;
         let description = this.props.goal.description;
         return(
-            status === 'Completed' ? 
-            <div className={status} id={id}>
-                <span>Completed </span>
-                <span>{description}</span>
-                <span id='originalDate'> Original Target Date: {this.props.goal.targetDate}</span>
-            </div>
+            status === 'Completed' ?
+                <div className={status}>
+                    <span>Completed: {description}</span> <br />
+                    <span>Original Target Date: {this.props.goal.targetDate}</span>
+                </div>
             : status === 'In-Progress' ?
-            <div className={status} id={id}>
-                <span>{description}</span>
-                {this.setActionsBasedOnDate()}
-            </div>
+                <div className={status}>
+                    <span>{description}</span>
+                    {this.setActionsBasedOnDate()}
+                </div>
             :
-            <div className={status} id={id}>
-                <span>Given up on </span>
-                <span>{description}</span>
-            </div>
+                <div className={status}>
+                    <span>Given up on: {description}</span>
+                </div>
         )
     }
 }

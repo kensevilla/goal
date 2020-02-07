@@ -1,0 +1,25 @@
+
+#year{
+    font-size: 30px;
+}
+
+#date{
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+#timeline{
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+hr{
+    background-color: #808080; 
+    height: 1px; 
+    border: 0;
+}
+
+.ant-card{
+    overflow: auto;
+    margin: 50px;
+}
