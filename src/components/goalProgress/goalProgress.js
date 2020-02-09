@@ -6,7 +6,7 @@ import Goal from '../goal/goal'
 import 'antd/dist/antd.css'
 import { Timeline, Icon, Card } from 'antd'
 
-import {convertMonth} from '../util/util'
+import {convertMonth, generateUUID} from '../util/util'
 import './goalProgress.css'
 
 class GoalProgress extends React.Component{
@@ -52,7 +52,7 @@ class GoalProgress extends React.Component{
             let splittedDate = date.split("-");
             let dateToShow = convertMonth(splittedDate[1]) + " " + splittedDate[2];
             return <div className={date} key={date}>
-                 <Timeline.Item id="date" dot={<Icon type="pushpin" style={{ fontSize: '25px' }} />}>{dateToShow}</Timeline.Item>
+                 <Timeline.Item id="date" dot={<Icon type="pushpin" style={{ fontSize: '25px' }} key={date} />}>{dateToShow}</Timeline.Item>
                 {goalsPerDate}
             </div>
         })
@@ -63,7 +63,7 @@ class GoalProgress extends React.Component{
             let color = goal.status==='Completed' ? 'green' : goal.status === 'In-Progress' ? 'gray' : 'red';
             let dateToCheck = this.getDateToCheck(goal);
             if(date === dateToCheck){
-                return <Timeline.Item color={color}><Goal goal={goal} key={goal.id} /></Timeline.Item>
+                return <Timeline.Item color={color} key={generateUUID()}><Goal goal={goal} key={generateUUID()} /></Timeline.Item>
             }
         })
     }

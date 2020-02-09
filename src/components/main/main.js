@@ -10,7 +10,7 @@ import {fetchGoals} from '../../state/goal/action'
 import 'antd/dist/antd.css'
 import { Row, Col } from 'antd'
 
-
+import './main.css'
 
 class Main extends React.Component{
     componentDidMount(){

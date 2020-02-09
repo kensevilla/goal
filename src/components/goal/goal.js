@@ -33,19 +33,20 @@ class Goal extends React.Component{
     render(){
         let status  = this.props.goal.status;
         let description = this.props.goal.description;
+        let id = this.props.id;
         return(
             status === 'Completed' ?
-                <div className={status}>
+                <div className={status} key={id}>
                     <span>Completed: {description}</span> <br />
                     <span>Original Target Date: {this.props.goal.targetDate}</span>
                 </div>
             : status === 'In-Progress' ?
-                <div className={status}>
+                <div className={status} key={id}>
                     <span>{description}</span>
                     {this.setActionsBasedOnDate()}
                 </div>
             :
-                <div className={status}>
+                <div className={status} key={id}>
                     <span>Given up on: {description}</span>
                 </div>
         )

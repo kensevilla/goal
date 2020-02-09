@@ -18,8 +18,3 @@ hr{
     height: 1px; 
     border: 0;
 }
-
-.ant-card{
-    overflow: auto;
-    margin: 50px;
-}
