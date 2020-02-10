@@ -13,3 +13,23 @@
     border-color: rgba(0, 148, 255, 0.8);
     color: white;
 }
+
+#moveGoalButton{
+    margin-left: 45%;
+    width: 65px;
+    height: 65px;
+    font-size: 30px;
+    background-color: transparent;
+    border-color: rgba(0, 148, 255, 0.8);
+    color: #808080;
+}
+
+#moveGoalButton:hover, #moveGoalButton:focus{
+    background-color: rgba(0, 148, 255, 0.8);
+    border-color: rgba(0, 148, 255, 0.8);
+    color: white;
+}
+
+.ant-card{
+    margin: 50px;
+}

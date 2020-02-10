@@ -5,17 +5,15 @@ import {bindActionCreators} from "redux"
 import GoalSetter from '../goalSetter/goalSetter'
 import GoalProgress from '../goalProgress/goalProgress'
 
-import {fetchGoals} from '../../state/goal/action'
+import {hideModal} from '../../state/main/action'
 
 import 'antd/dist/antd.css'
-import { Row, Col } from 'antd'
+import { Row, Col, Modal } from 'antd'
 
 import './main.css'
+import Cal from '../calendar/calendar'
 
 class Main extends React.Component{
-    componentDidMount(){
-        this.props.actions.fetchGoals();
-    }
 
     handleChange = (event) =>{
         this.setState({
@@ -37,16 +35,31 @@ class Main extends React.Component{
                     </Col>
                     <Col span={2}></Col>
                 </Row>
+
+                <Modal title="Move Goal"
+                    visible={this.props.modalVisible}
+                    footer={null}
+                    onCancel={this.props.actions.hideModal}
+                    width={765}>
+                        <GoalSetter goalToBeMove = {this.props.goalToBeMove} />
+                </Modal>
             </div>
         )
     }
 }
 
+function mapStateToProps(state){
+    return {
+        modalVisible : state.main.modalVisible,
+        goalToBeMove : state.main.goalToBeMove
+    }
+}
+
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators({fetchGoals}, dispatch)}
+    return {actions: bindActionCreators({hideModal}, dispatch)}
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(Main);  

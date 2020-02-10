@@ -1,7 +1,9 @@
 import React from 'react'
 import {connect} from "react-redux"
+import {bindActionCreators} from "redux"
 
 import Goal from '../goal/goal'
+import {fetchGoals} from '../../state/goal/action'
 
 import 'antd/dist/antd.css'
 import { Timeline, Icon, Card } from 'antd'
@@ -10,6 +12,9 @@ import {convertMonth, generateUUID} from '../util/util'
 import './goalProgress.css'
 
 class GoalProgress extends React.Component{
+    componentDidMount(){
+        this.props.actions.fetchGoals();
+    }
 
     sortGoals = () => {
         return this.props.goals.sort((a, b) => {
@@ -90,7 +95,11 @@ function mapStateToProps(state){
     }
 }
 
+function mapDispatchToProps(dispatch) {
+    return {actions: bindActionCreators({fetchGoals}, dispatch)}
+}
+
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   )(GoalProgress);  
