@@ -20,16 +20,17 @@
     height: 65px;
     font-size: 30px;
     background-color: transparent;
-    border-color: rgba(0, 148, 255, 0.8);
+    border-color: #F2994A;
     color: #808080;
 }
 
 #moveGoalButton:hover, #moveGoalButton:focus{
-    background-color: rgba(0, 148, 255, 0.8);
-    border-color: rgba(0, 148, 255, 0.8);
+    background-color: #F2994A;
+    border-color: #F2994A;
     color: white;
 }
 
 .ant-card{
     margin: 50px;
 }
+

@@ -36,7 +36,7 @@ class Main extends React.Component{
                     <Col span={2}></Col>
                 </Row>
 
-                <Modal title="Move Goal"
+                <Modal title="Try Again"
                     visible={this.props.modalVisible}
                     footer={null}
                     onCancel={this.props.actions.hideModal}

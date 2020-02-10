@@ -22,8 +22,9 @@ class Cal extends React.Component{
 
     render(){
         const { targetDate } = this.state;
+        let calendarClass = this.props.action + 'Calendar';
         return(
-            <div className='Calendar'>
+            <div className={calendarClass}>
                 <Alert message={`You selected date: ${targetDate && targetDate.format('YYYY-MM-DD')}`} />
                 <Calendar value={targetDate} onChange={this.handleChange} fullscreen={false} />
             </div>

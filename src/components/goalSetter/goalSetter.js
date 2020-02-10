@@ -15,7 +15,8 @@ import {getCurrentDate} from '../util/util'
 class GoalSetter extends React.Component{
     state = {
         goalDesc: '',
-        targetDate: getCurrentDate()
+        targetDate: getCurrentDate(),
+        action: this.props.goalToBeMove ? 'Move' : 'Add'
     }
 
     handleDescChange = (event) =>{
@@ -46,7 +47,7 @@ class GoalSetter extends React.Component{
 
     setInputArea = () =>{
         const { TextArea } = Input;
-        return this.props.goalToBeMove ? 
+        return this.state.action === 'Move' ? 
             <Row>
                 <Col span={20}>
                     <PageHeader
@@ -67,7 +68,7 @@ class GoalSetter extends React.Component{
                     <TextArea placeholder={"What do you want to do..."} autoSize={{ minRows: 4, maxRows: 4 }} name='goalDesc' onChange={this.handleDescChange} value={this.state.goalDesc} />
                 </Col>
                 <Col span={4}>
-                    <Button id="addGoalButton"  shape="circle" onClick= {this.props.goalToBeMove ? this.moveGoal : this.addGoal}><Icon type="plus" /></Button>
+                    <Button id="addGoalButton"  shape="circle" onClick= {this.addGoal}><Icon type="plus" /></Button>
                 </Col>
             </Row>
     }
@@ -78,7 +79,7 @@ class GoalSetter extends React.Component{
             <div className='GoalSetter'>
                 <Card hoverable
                       style={{ width: 700 }}
-                      cover={<Cal calendarChange={this.handleCalendarChange} />}>
+                      cover={<Cal calendarChange={this.handleCalendarChange} action={this.state.action} />}>
                         <div className="InputArea">
                            {this.setInputArea()}
                         </div>

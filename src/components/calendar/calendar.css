@@ -2,10 +2,63 @@
     width: 100px;
 }
 
-.ant-fullcalendar-selected-day .ant-fullcalendar-value, .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value{
+.AddCalendar .ant-fullcalendar-selected-day .ant-fullcalendar-value, .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value{
     background-color: rgba(0, 148, 255, 0.8);
 }
 
-.ant-alert-info{
+.AddCalendar .ant-alert-info{
     border: 1px solid rgba(0, 148, 255, 0.8);
+}
+
+.MoveCalendar .ant-fullcalendar-selected-day .ant-fullcalendar-value, .MoveCalendar .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value{
+    background: #F2994A;
+    background-color: #F2994A;
+    box-shadow: 0 0 0 1px #F2994A inset;
+}
+
+.MoveCalendar .ant-radio-button-wrapper:hover{
+    color: #F2994A;
+    border-color: #F2994A;
+}
+
+.MoveCalendar .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled){
+    color: #F2994A;
+    border-color: #F2994A;
+    box-shadow: -1px 0 0 0 #F2994A;
+}
+
+
+.MoveCalendar .ant-radio-button-wrapper-checked{
+    color: #F2994A;
+    border-color: #F2994A;
+}
+
+.MoveCalendar .ant-fullcalendar-today .ant-fullcalendar-value, .MoveCalendar .ant-fullcalendar-month-panel-current-cell .ant-fullcalendar-value{
+    box-shadow: 0 0 0 1px #F2994A inset;
+}
+
+.MoveCalendar .ant-fullcalendar-value:hover{
+    background: #FFE9D5
+}
+
+.MoveCalendar .ant-select-selection:hover{
+    border-color: #F2994A;
+}
+.MoveCalendar .ant-select-open .ant-select-selection{
+    box-shadow: 0 0 0 2px #FFE9D5;
+    border-color: #F2994A
+}
+
+.ant-select-focused .ant-select-selection .ant-select-selection:focus, .ant-select-selection:active{
+    box-shadow: 0 0 0 2px #FFE9D5;
+    border-color: #F2994A
+}
+
+.MoveCalendar .ant-alert-info{
+    background-color: #FFE9D5;
+    border: 1px solid #F2994A;
+}
+
+.ant-select{
+    background-color: #FFE9D5;
 }

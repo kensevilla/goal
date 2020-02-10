@@ -15,6 +15,7 @@ class Goal extends React.Component{
         let goalToBeMove = {
             id: this.props.goal.id,
             description: this.props.goal.description,
+            targetDate: this.props.goal.targetDate,
             newTargetDate: this.state.newTargetDate
         }
         this.props.actions.showModal(goalToBeMove)
