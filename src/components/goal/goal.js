@@ -3,7 +3,7 @@ import {connect} from "react-redux"
 import {bindActionCreators} from "redux"
 
 import 'antd/dist/antd.css'
-import { Row, Col, Button, Icon, Alert } from 'antd';
+import { Row, Col, Button, Icon, Alert, Popconfirm, message } from 'antd'
 
 import {completeGoal, failGoal, moveGoal} from '../../state/goal/action'
 import {showModal} from '../../state/main/action'
@@ -20,6 +20,11 @@ class Goal extends React.Component{
             targetDate: this.props.goal.targetDate,
         }
         this.props.actions.showModal(goalToBeMove)
+    }
+
+    failGoal = () => {
+        this.props.actions.failGoal(this.props.goal.id)
+        message.error('Gave-up on goal.');
     }
 
     prepareGoalBasedOnStatus = () =>{
@@ -71,7 +76,10 @@ class Goal extends React.Component{
             </div>
             :
             <div className='Action'>
-                <Button id="failButton"  shape="circle" onClick={this.props.actions.failGoal.bind(this, id)}><Icon type="close" /></Button>
+                <Popconfirm placement="bottom" title={"Are you sure you want to give up?"} onConfirm={this.failGoal} okText="Sadly, yes" cancelText="No"  
+                    icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}>
+                    <Button id="failButton"  shape="circle"><Icon type="close" /></Button>
+                </Popconfirm>
                 <Button id="moveButton"  shape="circle" onClick={this.moveGoal}><Icon type="redo" /></Button>
             </div>;
     }
