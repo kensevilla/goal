@@ -13,6 +13,11 @@ import './goal.css'
 
 class Goal extends React.Component{
 
+    completeGoal = () => {
+        this.props.actions.completeGoal(this.props.goal.id)
+        message.success('Completed goal.');
+    }
+
     moveGoal = () => {
         let goalToBeMove = {
             id: this.props.goal.id,
@@ -69,10 +74,12 @@ class Goal extends React.Component{
     }
     
     setActionsBasedOnDate = () =>{
-        let id = this.props.goal.id;
         return this.props.goal.targetDate >= getCurrentDate() ? 
             <div className='Action'>
-                <Button id="completeButton"  shape="circle" onClick={this.props.actions.completeGoal.bind(this, id)}><Icon type="check" /></Button>
+                <Popconfirm placement="right" title={"Complete this goal?"} onConfirm={this.completeGoal} okText="Yes!!" cancelText="Not yet"  
+                    icon={<Icon type="check-circle" style={{ color: 'green' }} />}>
+                    <Button id="completeButton"  shape="circle"><Icon type="check" /></Button>
+                </Popconfirm>
             </div>
             :
             <div className='Action'>
