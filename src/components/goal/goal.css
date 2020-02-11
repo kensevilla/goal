@@ -1,0 +1,72 @@
+#completeButton{
+    margin-left: 25%;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    color: #808080;
+}
+
+#completeButton:hover, #completeButton:focus{
+    color: rgb(0, 201, 0);
+    border-color: #808080
+}
+
+#completedIcon{
+    margin-left: 25%;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    color: rgb(0, 201, 0);
+}
+
+#failButton{
+    margin-left: 25%;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    color: #808080;
+}
+
+#failButton:hover, #failButton:focus{
+    color: #f5222d;
+    border-color: #808080
+}
+
+#failIcon{
+    margin-left: 25%;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: #f5222d;
+}
+
+
+#moveButton{
+    margin-left: 5%;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    color: #808080;
+}
+
+#moveButton:hover, #moveButton:focus{
+    color: #F2994A;
+    border-color: #808080
+}
+
+#goalDescription{
+    font-size: 15px;
+}
+
+.ant-alert-message {
+    color: #808080;
+    font-size: 15px;
+}
