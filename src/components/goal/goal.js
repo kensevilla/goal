@@ -56,6 +56,9 @@ class Goal extends React.Component{
                     <Col span={7}>
                         <Icon id='failIcon' type="close" />
                     </Col>
+                    <Col span={5}>
+                        <span>Given-up on: {this.props.goal.finishDate}</span>
+                    </Col>
                 </Row>
         )
     }

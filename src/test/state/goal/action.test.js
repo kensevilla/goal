@@ -3,6 +3,7 @@ import * as actions from '../../../state/goal/action'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from "axios"
+import { getCurrentDate } from '../../../components/util/util'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
@@ -97,7 +98,7 @@ describe('Main actions', () => {
             "id" : 1,
             "description": "wow",
             "targetDate": "2018-12-12",
-            "finishDate": "",
+            "finishDate": getCurrentDate(),
             "status": "Fail"
         };
 

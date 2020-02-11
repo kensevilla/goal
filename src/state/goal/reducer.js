@@ -24,6 +24,7 @@ export default function reducer(state = initialState, action) {
             return {...state, 
                 goals: state.goals.map(goal => {
                     if(goal.id === action.payload){
+                        goal.finishDate = getCurrentDate();
                         goal.status = 'Fail';
                     }
                     return goal;

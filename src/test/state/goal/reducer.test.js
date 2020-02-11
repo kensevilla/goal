@@ -106,7 +106,7 @@ describe('Main reducers', () => {
             "id" : 1,
             "description": "wow",
             "targetDate": "2018-12-12",
-            "finishDate": "",
+            "finishDate": getCurrentDate(),
             "status": "Fail"
         }];
         checkReducer(action, expectedState, clone(newInitialState));
