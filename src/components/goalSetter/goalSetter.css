@@ -31,9 +31,10 @@
 }
 
 .GoalSetter{
-    margin: 40px;
+    margin-left: 50px;
+    margin-top: 40px;
 }
 
 .GoalSetterModal{
-    margin: 0px;
+    margin-left: 10px;
 }

@@ -18,8 +18,8 @@ class GoalProgress extends React.Component{
 
     sortGoals = () => {
         return this.props.goals.sort((a, b) => {
-            let date1 = (a.finishDate === '') ? a.targetDate : a.finishDate;
-            let date2 = (b.finishDate === '') ? b.targetDate : b.finishDate;
+            let date1 = (a.status === 'Completed') ? a.finishDate : a.targetDate;
+            let date2 = (b.status === 'Completed') ? b.finishDate : b.targetDate;
             return (date1 > date2) ? 1 : -1;
         })
     }
@@ -81,7 +81,7 @@ class GoalProgress extends React.Component{
         let goals = this.prepareGoals();
         return(
             <div className="GoalProgress">
-                <Card id="card" style={{ width: 700, height: 800}}>
+                <Card id="card" style={{ width: 800, height: 800}}>
                     {goals}
                 </Card>
             </div>

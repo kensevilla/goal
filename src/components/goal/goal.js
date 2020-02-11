@@ -28,10 +28,10 @@ class Goal extends React.Component{
         return(
             status === 'Completed' ?
                 <Row>
-                    <Col span={12}>
+                    <Col span={13}>
                         <Alert type="success" showIcon={false} message={description} banner />
                     </Col>
-                    <Col span={7}>
+                    <Col span={6}>
                         <Icon id='completedIcon' type="check" />
                     </Col>
                     <Col span={5}>
@@ -40,20 +40,20 @@ class Goal extends React.Component{
                 </Row>
             : status === 'In-Progress' ?
                 <Row>
-                    <Col span={12}>
+                    <Col span={13}>
                         <span id='goalDescription'>{description}</span>
                         {this.props.goal.targetDate < getCurrentDate() && <Alert message="Failed to finish before target date. Either try again or give-up." banner />}
                     </Col>
-                    <Col span={7}>
+                    <Col span={6}>
                         {this.setActionsBasedOnDate()}
                     </Col>
                 </Row>
             :
                 <Row>
-                    <Col span={12}>
+                    <Col span={13}>
                         <Alert type="error" showIcon={false} message={description} banner />
                     </Col>
-                    <Col span={7}>
+                    <Col span={6}>
                         <Icon id='failIcon' type="close" />
                     </Col>
                     <Col span={5}>
