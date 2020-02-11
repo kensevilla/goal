@@ -78,7 +78,7 @@ class GoalSetter extends React.Component{
         return(
             <div className={this.props.modal ? "GoalSetterModal" : "GoalSetter"}>
                 <Card hoverable
-                      style={{ width: 700, height: 520 }}
+                      style={{ width: 700 }}
                       cover={<Cal calendarChange={this.handleCalendarChange} action={this.state.action} />}>
                         <div className="InputArea">
                            {this.setInputArea()}
