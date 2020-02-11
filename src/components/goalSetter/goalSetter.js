@@ -6,7 +6,7 @@ import Cal from '../calendar/calendar'
 import './goalSetter.css'
 
 import 'antd/dist/antd.css'
-import { Button, Icon, Card, Input, Row, Col, PageHeader } from 'antd'
+import { Button, Icon, Card, Input, Row, Col, PageHeader, message } from 'antd'
 
 import {hideModal} from '../../state/main/action'
 import {addGoal, moveGoal} from '../../state/goal/action'
@@ -38,11 +38,13 @@ class GoalSetter extends React.Component{
         }
         this.props.actions.addGoal(newGoal);
         this.setState({goalDesc : ''});
+        message.info('Added goal.');
     }
 
     moveGoal = () =>{
         this.props.actions.moveGoal(this.props.goalToBeMove.id, this.state.targetDate);
         this.props.actions.hideModal();
+        message.warning('Moved goal.');
     }
 
     setInputArea = () =>{
