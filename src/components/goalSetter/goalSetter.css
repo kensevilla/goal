@@ -30,7 +30,10 @@
     color: white;
 }
 
-.ant-card{
-    margin: 50px;
+.GoalSetter{
+    margin: 40px;
 }
 
+.GoalSetterModal{
+    margin: 0px;
+}

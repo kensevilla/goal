@@ -8,10 +8,9 @@ import GoalProgress from '../goalProgress/goalProgress'
 import {hideModal} from '../../state/main/action'
 
 import 'antd/dist/antd.css'
-import { Row, Col, Modal } from 'antd'
+import { Layout, Row, Col, Modal } from 'antd'
 
 import './main.css'
-import Cal from '../calendar/calendar'
 
 class Main extends React.Component{
 
@@ -22,27 +21,30 @@ class Main extends React.Component{
     }
 
     render(){
+        const { Header, Content } = Layout;
         return(
             <div className='Main'>
-                <Row>
-                    <Col span={2}></Col>
-                    <Col span={10}>
-                        <GoalProgress />
-                    </Col>
-                    <Col span={1}></Col>
-                    <Col span={10}>
-                        <GoalSetter />
-                    </Col>
-                    <Col span={2}></Col>
-                </Row>
+                <Layout>
+                    <Header></Header>
+                    <Content>
+                    <Row>
+                        <Col id='wow' span={12}>
+                            <GoalProgress />
+                        </Col>
+                        <Col span={12}>
+                            <GoalSetter />
+                        </Col>
+                    </Row>
 
-                <Modal title="Try Again"
-                    visible={this.props.modalVisible}
-                    footer={null}
-                    onCancel={this.props.actions.hideModal}
-                    width={765}>
-                        <GoalSetter goalToBeMove = {this.props.goalToBeMove} />
-                </Modal>
+                    <Modal title="Try Again"
+                        visible={this.props.modalVisible}
+                        footer={null}
+                        onCancel={this.props.actions.hideModal}
+                        width={765}>
+                            <GoalSetter modal = {true} goalToBeMove = {this.props.goalToBeMove} />
+                    </Modal>
+                    </Content>
+                </Layout>
             </div>
         )
     }

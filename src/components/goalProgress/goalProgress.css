@@ -20,5 +20,13 @@ hr{
 
 .ant-card{
     overflow: auto;
-    margin: 50px;
+}
+
+.GoalProgress{
+    margin-top: 40px;
+    margin-left: 100px;
+}
+
+.GoalProgress .ant-card-bordered{
+    border: 0px;
 }
