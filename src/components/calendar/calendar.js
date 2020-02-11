@@ -2,7 +2,7 @@ import React from 'react';
 
 import 'antd/dist/antd.css';
 
-import { Calendar, Alert } from 'antd';
+import { Calendar, Alert } from 'antd'
 import moment from 'moment';
 import {getCurrentDate} from '../util/util'
 

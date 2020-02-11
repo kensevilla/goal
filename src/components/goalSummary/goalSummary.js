@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from "react-redux"
 
 import 'antd/dist/antd.css'
-import { Statistic, Card, Row, Col, Icon  } from 'antd';
+import { Statistic, Card, Row, Col, Icon  } from 'antd'
 
 import './goalSummary.css'
 

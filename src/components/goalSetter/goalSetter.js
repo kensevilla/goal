@@ -6,7 +6,7 @@ import Cal from '../calendar/calendar'
 import './goalSetter.css'
 
 import 'antd/dist/antd.css'
-import { Button, Icon, Card, Input, Row, Col, PageHeader } from 'antd';
+import { Button, Icon, Card, Input, Row, Col, PageHeader } from 'antd'
 
 import {hideModal} from '../../state/main/action'
 import {addGoal, moveGoal} from '../../state/goal/action'
@@ -76,7 +76,7 @@ class GoalSetter extends React.Component{
 
     render(){
         return(
-            <div className={this.props.modal ? "GoalSetterModal" : "GoalSetter"}>
+            <div className={this.props.isModal ? "GoalSetterModal" : "GoalSetter"}>
                 <Card hoverable
                       style={{ width: 700 }}
                       cover={<Cal calendarChange={this.handleCalendarChange} action={this.state.action} />}>

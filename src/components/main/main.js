@@ -43,7 +43,7 @@ class Main extends React.Component{
                         footer={null}
                         onCancel={this.props.actions.hideModal}
                         width={765}>
-                            <GoalSetter modal = {true} goalToBeMove = {this.props.goalToBeMove} />
+                            <GoalSetter isModal = {true} goalToBeMove = {this.props.goalToBeMove} />
                     </Modal>
                     </Content>
                 </Layout>
