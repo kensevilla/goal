@@ -11,6 +11,7 @@ import 'antd/dist/antd.css'
 import { Layout, Row, Col, Modal } from 'antd'
 
 import './main.css'
+import GoalSummary from '../goalSummary/goalSummary'
 
 class Main extends React.Component{
 
@@ -32,6 +33,7 @@ class Main extends React.Component{
                             <GoalProgress />
                         </Col>
                         <Col span={12}>
+                            <GoalSummary />
                             <GoalSetter />
                         </Col>
                     </Row>
