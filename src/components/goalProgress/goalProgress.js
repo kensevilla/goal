@@ -20,7 +20,7 @@ class GoalProgress extends React.Component{
         return this.props.goals.sort((a, b) => {
             let date1 = (a.status === 'Completed') ? a.finishDate : a.targetDate;
             let date2 = (b.status === 'Completed') ? b.finishDate : b.targetDate;
-            return (date1 > date2) ? 1 : -1;
+            return (date1 < date2) ? 1 : -1;
         })
     }
 
