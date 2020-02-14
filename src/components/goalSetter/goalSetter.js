@@ -17,13 +17,13 @@ class GoalSetter extends React.Component{
         goalDesc: '',
         targetDate: getCurrentDate(),
         action: this.props.goalToBeMove ? 'Move' : 'Add',
-        disableTextArea : true
+        disableButton : true
     }
 
     handleDescChange = (event) =>{
         this.setState({
             [event.target.name] : event.target.value,
-            disableTextArea : event.target.value.trim().length > 0 ? false : true
+            disableButton : event.target.value.trim().length > 0 ? false : true
         })
     }
 
@@ -39,7 +39,11 @@ class GoalSetter extends React.Component{
             status: 'In-Progress'
         }
         this.props.actions.addGoal(newGoal);
-        this.setState({goalDesc : ''});
+        this.setState({
+            goalDesc : '',
+            disableButton : true
+        });
+
         message.info('Added goal.');
     }
 
@@ -72,7 +76,7 @@ class GoalSetter extends React.Component{
                     <TextArea placeholder={"What do you want to do..."} autoSize={{ minRows: 4, maxRows: 4 }} name='goalDesc' onChange={this.handleDescChange} value={this.state.goalDesc} />
                 </Col>
                 <Col span={4}>
-                    <Button id="addGoalButton"  shape="circle" onClick= {this.addGoal} disabled={this.state.disableTextArea} ><Icon type="plus" /></Button>
+                    <Button id="addGoalButton"  shape="circle" onClick= {this.addGoal} disabled={this.state.disableButton} ><Icon type="plus" /></Button>
                 </Col>
             </Row>
     }
