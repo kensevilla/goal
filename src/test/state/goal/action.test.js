@@ -25,7 +25,7 @@ describe('Main actions', () => {
             "finishDate": "",
             "status": "In-Progress"
         }];
-        const expectedURL = 'http://localhost:8080/api/goal/getAll';
+        const expectedURL = 'http://localhost:9090/api/goal/getAll';
         jest.spyOn(axios, "get").mockReturnValueOnce(Promise.resolve({mockReturnValue}));
 
         return store.dispatch(actions.fetchGoals()).then(()=>{
@@ -54,7 +54,7 @@ describe('Main actions', () => {
             "status": "In-Progress"
         };
 
-        const expectedURL = 'http://localhost:8080/api/goal/addGoal';
+        const expectedURL = 'http://localhost:9090/api/goal/addGoal';
         jest.spyOn(axios, "post").mockReturnValueOnce(Promise.resolve(mockReturnValue));
 
         return store.dispatch(actions.addGoal(goalDetails)).then(()=>{
@@ -79,7 +79,7 @@ describe('Main actions', () => {
 
         const id = 1;
 
-        const expectedURL = 'http://localhost:8080/api/goal/completeGoal/'+ id;
+        const expectedURL = 'http://localhost:9090/api/goal/completeGoal/'+ id;
         jest.spyOn(axios, "post").mockReturnValueOnce(Promise.resolve({data: mockReturnValue}));
 
         return store.dispatch(actions.completeGoal(id)).then(()=>{
@@ -104,7 +104,7 @@ describe('Main actions', () => {
 
         const id = 1;
 
-        const expectedURL = 'http://localhost:8080/api/goal/failGoal/'+ id;
+        const expectedURL = 'http://localhost:9090/api/goal/failGoal/'+ id;
         jest.spyOn(axios, "post").mockReturnValueOnce(Promise.resolve({data: mockReturnValue}));
 
         return store.dispatch(actions.failGoal(id)).then(()=>{
@@ -130,7 +130,7 @@ describe('Main actions', () => {
         const id = 1;
         const newTargetDate = {targetDate : "2020/02/03"};
 
-        const expectedURL = 'http://localhost:8080/api/goal/moveGoal/'+ id;
+        const expectedURL = 'http://localhost:9090/api/goal/moveGoal/'+ id;
         jest.spyOn(axios, "post").mockReturnValueOnce(Promise.resolve({data: mockReturnValue}));
 
         return store.dispatch(actions.moveGoal(id, newTargetDate.targetDate)).then(()=>{

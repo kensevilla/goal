@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://localhost:8080/api/goal';
+const url = 'http://localhost:9090/api/goal';
 
 export const fetchGoals = () =>{
     return async (dispatch) => {
