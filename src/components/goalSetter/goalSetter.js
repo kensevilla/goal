@@ -37,7 +37,7 @@ class GoalSetter extends React.Component{
             targetDate: this.state.targetDate,
             finishDate: '',
             status: 'In-Progress',
-            userId: 1
+            userId: '1'
         }
         this.props.actions.addGoal(newGoal);
         this.setState({
