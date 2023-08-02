@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = 'http://localhost:9090/api/goal';
+const url = 'https://ken-goal-backend-50de352b41ec.herokuapp.com/api/goal';
 
 export const fetchGoals = () =>{
     return async (dispatch) => {
