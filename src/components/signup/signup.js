@@ -11,7 +11,6 @@ const Signup = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [signupSuccess, setSignupSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleSubmit = (e) => {
@@ -25,7 +24,7 @@ const Signup = (props) => {
 
         props.createUser({username: username, password: password}).then((resp) => {
             if(resp) {
-                setSignupSuccess(true);
+                props.onFormSwitch('main');
             } else {
                 setErrorMessage("Username is taken.");
             }
@@ -39,25 +38,19 @@ const Signup = (props) => {
     }
 
         return(
-            <>
-            {
-                signupSuccess ? <Main /> :
-                <div className="signup">
-                    <form onSubmit={handleSubmit} className="signup-form">
-                        <div className="errorMessage"><label>{errorMessage}</label></div>
-                        <label>Username</label>
-                        <input value={username} onChange={(e) => setUsername(e.target.value)} required></input>
-                        <label>Password</label>
-                        <input value={password} onChange={(e) => setPassword(e.target.value)} type='password' required></input>
-                        <label>Confirm Password</label>
-                        <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type='password' required></input>
-                        <button>Signup</button>
-                        <a onClick={() => props.onFormSwitch('login')}>Login here</a>
-                    </form>
-                </div>
-            }
-            </>
-            
+            <div className="signup">
+                <form onSubmit={handleSubmit} className="signup-form">
+                    <div className="errorMessage"><label>{errorMessage}</label></div>
+                    <label>Username</label>
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} required></input>
+                    <label>Password</label>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type='password' required></input>
+                    <label>Confirm Password</label>
+                    <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} type='password' required></input>
+                    <button>Signup</button>
+                    <a onClick={() => props.onFormSwitch('login')}>Login here</a>
+                </form>
+            </div>
         )
 }
 

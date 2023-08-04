@@ -25,6 +25,7 @@ class Main extends React.Component{
 
     handleLogout = () => {
         this.props.actions._logoutUser();
+        this.props.onFormSwitch('login');
     }
 
     render(){
@@ -32,7 +33,7 @@ class Main extends React.Component{
         return(
             <>
             {
-                !this.props.userId ? <Login /> :
+                this.props.userId &&
                 <div className='Main'>
                     <Layout>
                         <Header>
