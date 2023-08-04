@@ -7,6 +7,7 @@ import rootReducer from './state/rootReducer'
 import {applyMiddleware, compose, createStore} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux';
+import { AuthProvider } from './context/AuthProvider';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 let store = createStore(
@@ -14,7 +15,14 @@ let store = createStore(
     composeEnhancers(applyMiddleware(thunk))
 );
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <AuthProvider>
+            <App />
+        </AuthProvider>
+    </Provider>, 
+    document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

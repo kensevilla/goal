@@ -6,12 +6,14 @@ import GoalSetter from '../goalSetter/goalSetter'
 import GoalProgress from '../goalProgress/goalProgress'
 
 import {hideModal} from '../../state/main/action'
+import {_logoutUser} from '../../state/user/action'
 
 import 'antd/dist/antd.css'
 import { Layout, Row, Col, Modal } from 'antd'
 
 import './main.css'
 import GoalSummary from '../goalSummary/goalSummary'
+import Login from '../login/login'
 
 class Main extends React.Component{
 
@@ -21,33 +23,44 @@ class Main extends React.Component{
         })
     }
 
+    handleLogout = () => {
+        this.props.actions._logoutUser();
+    }
+
     render(){
         const { Header, Content } = Layout;
         return(
-            <div className='Main'>
-                <Layout>
-                    <Header></Header>
-                    <Content>
-                    <Row>
-                        <Col id='wow' span={12}>
-                            <GoalProgress />
-                        </Col>
-                        <Col span={12}>
-                            <GoalSummary />
-                            <GoalSetter />
-                        </Col>
-                    </Row>
+            <>
+            {
+                !this.props.userId ? <Login /> :
+                <div className='Main'>
+                    <Layout>
+                        <Header>
+                        <button onClick={this.handleLogout} className='logout-button'>X</button>
+                        </Header>
+                        <Content>
+                        <Row>
+                            <Col id='wow' span={12}>
+                                <GoalProgress />
+                            </Col>
+                            <Col span={12}>
+                                <GoalSummary />
+                                <GoalSetter />
+                            </Col>
+                        </Row>
 
-                    <Modal title="Try Again"
-                        visible={this.props.modalVisible}
-                        footer={null}
-                        onCancel={this.props.actions.hideModal}
-                        width={765}>
-                            <GoalSetter isModal = {true} goalToBeMove = {this.props.goalToBeMove} />
-                    </Modal>
-                    </Content>
-                </Layout>
-            </div>
+                        <Modal title="Try Again"
+                            visible={this.props.modalVisible}
+                            footer={null}
+                            onCancel={this.props.actions.hideModal}
+                            width={765}>
+                                <GoalSetter isModal = {true} goalToBeMove = {this.props.goalToBeMove} />
+                        </Modal>
+                        </Content>
+                    </Layout>
+                </div>
+            }
+            </>
         )
     }
 }
@@ -55,12 +68,13 @@ class Main extends React.Component{
 function mapStateToProps(state){
     return {
         modalVisible : state.main.modalVisible,
-        goalToBeMove : state.main.goalToBeMove
+        goalToBeMove : state.main.goalToBeMove,
+        userId: state.user.userId
     }
 }
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators({hideModal}, dispatch)}
+    return {actions: bindActionCreators({hideModal, _logoutUser}, dispatch)}
 }
 
 export default connect(

@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const url = 'https://ken-goal-backend-50de352b41ec.herokuapp.com/api/goal';
+const url = 'https://ken-goal-backend-4293616a5984.herokuapp.com/api/goal';
 
-export const fetchGoals = () =>{
+export const fetchGoals = userId =>{
     return async (dispatch) => {
-        const response = await axios.get(url + '/getAll');
+        const response = await axios.get(url + '/getAll/' + userId);
         dispatch({
             type: "FETCH_GOALS",
             payload: response.data

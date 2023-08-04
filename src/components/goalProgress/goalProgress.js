@@ -13,7 +13,7 @@ import './goalProgress.css'
 
 class GoalProgress extends React.Component{
     componentDidMount(){
-        this.props.actions.fetchGoals();
+        this.props.actions.fetchGoals(this.props.userId);
     }
 
     sortGoals = () => {
@@ -91,7 +91,8 @@ class GoalProgress extends React.Component{
 
 function mapStateToProps(state){
     return {
-        goals : state.goal.goals
+        goals : state.goal.goals,
+        userId: state.user.userId
     }
 }
 

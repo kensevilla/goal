@@ -37,7 +37,7 @@ class GoalSetter extends React.Component{
             targetDate: this.state.targetDate,
             finishDate: '',
             status: 'In-Progress',
-            userId: '1'
+            userId: this.props.userId
         }
         this.props.actions.addGoal(newGoal);
         this.setState({
@@ -97,12 +97,17 @@ class GoalSetter extends React.Component{
         )
     }
 }
+function mapStateToProps(state){
+    return {
+        userId: state.user.userId
+    }
+}
 
 function mapDispatchToProps(dispatch) {
     return {actions: bindActionCreators({addGoal, moveGoal, hideModal}, dispatch)}
 }
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(GoalSetter);  

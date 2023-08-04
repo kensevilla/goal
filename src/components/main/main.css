@@ -11,3 +11,17 @@ body{
     background-color: white;
     height: calc(100vh - 67px);
 }
+
+.logout-button {
+    float: right;
+    line-height: normal;
+    margin: 0.5rem;
+    height: 40px;
+    padding: 0.5rem;
+    width: 40px;
+    background: crimson;
+    border: none;
+    color: white;
+    font-family: cursive;
+    font-style: italic;
+}

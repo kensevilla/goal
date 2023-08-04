@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import Main from './components/main/main'
+import Login from './components/login/login';
+import Signup from './components/signup/signup';
 
-class App extends React.Component {
-  render(){
-    return (
-      <div className="App">
-        <Main />
-      </div>
-    );
+
+function App() {
+  const [currentForm, setCurrentForm] = useState('login');
+  const toggleForm = (formName) => {
+    setCurrentForm(formName);
   }
+
+  return (
+    <div className="App">
+      {
+        currentForm === 'login' ? <Login onFormSwitch={toggleForm} /> : <Signup onFormSwitch={toggleForm} />
+      }
+      
+    </div>
+  );
+  
 }
 
 export default App;
